@@ -1,0 +1,9 @@
+.eclipse
+.idea
+*.iml
+*.ipr
+*.iws
+out
+target
+/logs/
+/project/project
