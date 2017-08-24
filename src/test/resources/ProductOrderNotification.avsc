@@ -1,0 +1,511 @@
+{
+  "namespace": "avro.ProductOrderNotification",
+  "type": "record",
+  "name": "ProductOrderNotification",
+  "fields": [
+    {
+      "name": "eventId",
+      "default": null,
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    {
+      "name": "eventTime",
+      "default": null,
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    {
+      "name": "eventType",
+      "default": null,
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    {
+      "name": "resourcePath",
+      "default": null,
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    {
+      "name": "fieldPath",
+      "default": null,
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    {
+      "name": "event",
+      "default": null,
+      "type": [
+        "null",
+        {
+          "type": "record",
+          "namespace": "avro.ProductOrderNotification",
+          "name": "EventType",
+          "fields": [
+            {
+              "name": "productOrder",
+              "default": null,
+              "type": [
+                "null",
+                {
+                  "type": "record",
+                  "namespace": "avro.ProductOrderNotification",
+                  "name": "ProductOrderType",
+                  "fields": [
+                    {
+                      "name": "id",
+                      "default": null,
+                      "type": [
+                        "null",
+                        "string"
+                      ]
+                    },
+                    {
+                      "name": "href",
+                      "default": null,
+                      "type": [
+                        "null",
+                        "string"
+                      ]
+                    },
+                    {
+                      "name": "externalId",
+                      "default": null,
+                      "type": [
+                        "null",
+                        "string"
+                      ]
+                    },
+                    {
+                      "name": "priority",
+                      "default": null,
+                      "type": [
+                        "null",
+                        "long"
+                      ]
+                    },
+                    {
+                      "name": "description",
+                      "default": null,
+                      "type": [
+                        "null",
+                        "string"
+                      ]
+                    },
+                    {
+                      "name": "category",
+                      "default": null,
+                      "type": [
+                        "null",
+                        "string"
+                      ]
+                    },
+                    {
+                      "name": "veeaId",
+                      "default": null,
+                      "type": [
+                        "null",
+                        "long"
+                      ]
+                    },
+                    {
+                      "name": "vantivMID",
+                      "default": null,
+                      "type": [
+                        "null",
+                        "string"
+                      ]
+                    },
+                    {
+                      "name": "trackingNumber",
+                      "default": null,
+                      "type": [
+                        "null",
+                        "string"
+                      ]
+                    },
+                    {
+                      "name": "riskCategory",
+                      "default": null,
+                      "type": [
+                        "null",
+                        "string"
+                      ]
+                    },
+                    {
+                      "name": "transactionType",
+                      "default": null,
+                      "type": [
+                        "null",
+                        "string"
+                      ]
+                    },
+                    {
+                      "name": "tokenId",
+                      "default": null,
+                      "type": [
+                        "null",
+                        "string"
+                      ]
+                    },
+                    {
+                      "name": "state",
+                      "default": null,
+                      "type": [
+                        "null",
+                        "string"
+                      ]
+                    },
+                    {
+                      "name": "orderDate",
+                      "default": null,
+                      "type": [
+                        "null",
+                        "string"
+                      ]
+                    },
+                    {
+                      "name": "completionDate",
+                      "default": null,
+                      "type": [
+                        "null",
+                        "string"
+                      ]
+                    },
+                    {
+                      "name": "requestedStartDate",
+                      "default": null,
+                      "type": [
+                        "null",
+                        "string"
+                      ]
+                    },
+                    {
+                      "name": "requestedCompletionDate",
+                      "default": null,
+                      "type": [
+                        "null",
+                        "string"
+                      ]
+                    },
+                    {
+                      "name": "expectedCompletionDate",
+                      "default": null,
+                      "type": [
+                        "null",
+                        "string"
+                      ]
+                    },
+                    {
+                      "name": "notificationContact",
+                      "default": null,
+                      "type": [
+                        "null",
+                        "string"
+                      ]
+                    },
+                    {
+                      "name": "note",
+                      "default": null,
+                      "type": [
+                        "null",
+                        {
+                          "type": "array",
+                          "default": [],
+                          "items": {
+                            "type": "record",
+                            "namespace": "avro.ProductOrderNotification",
+                            "name": "NoteType",
+                            "fields": [
+                              {
+                                "name": "text",
+                                "default": null,
+                                "type": [
+                                  "null",
+                                  "string"
+                                ]
+                              },
+                              {
+                                "name": "date",
+                                "default": null,
+                                "type": [
+                                  "null",
+                                  "string"
+                                ]
+                              },
+                              {
+                                "name": "author",
+                                "default": null,
+                                "type": [
+                                  "null",
+                                  "string"
+                                ]
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "name": "relatedParty",
+                      "default": null,
+                      "type": [
+                        "null",
+                        {
+                          "type": "array",
+                          "default": [],
+                          "items": {
+                            "type": "record",
+                            "namespace": "avro.ProductOrderNotification",
+                            "name": "RelatedPartyType",
+                            "fields": [
+                              {
+                                "name": "role",
+                                "default": null,
+                                "type": [
+                                  "null",
+                                  "string"
+                                ]
+                              },
+                              {
+                                "name": "id",
+                                "default": null,
+                                "type": [
+                                  "null",
+                                  "string"
+                                ]
+                              },
+                              {
+                                "name": "href",
+                                "default": null,
+                                "type": [
+                                  "null",
+                                  "string"
+                                ]
+                              },
+                              {
+                                "name": "name",
+                                "default": null,
+                                "type": [
+                                  "null",
+                                  "string"
+                                ]
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "name": "orderItem",
+                      "default": null,
+                      "type": [
+                        "null",
+                        {
+                          "type": "array",
+                          "default": [],
+                          "items": {
+                            "type": "record",
+                            "namespace": "avro.ProductOrderNotification",
+                            "name": "OrderItemType",
+                            "fields": [
+                              {
+                                "name": "id",
+                                "default": null,
+                                "type": [
+                                  "null",
+                                  "string"
+                                ]
+                              },
+                              {
+                                "name": "action",
+                                "default": null,
+                                "type": [
+                                  "null",
+                                  "string"
+                                ]
+                              },
+                              {
+                                "name": "state",
+                                "default": null,
+                                "type": [
+                                  "null",
+                                  "string"
+                                ]
+                              },
+                              {
+                                "name": "billingAccount",
+                                "default": null,
+                                "type": [
+                                  "null",
+                                  {
+                                    "type": "array",
+                                    "default": [],
+                                    "items": {
+                                      "type": "record",
+                                      "namespace": "avro.ProductOrderNotification",
+                                      "name": "BillingAccountType",
+                                      "fields": [
+                                        {
+                                          "name": "id",
+                                          "default": null,
+                                          "type": [
+                                            "null",
+                                            "string"
+                                          ]
+                                        },
+                                        {
+                                          "name": "href",
+                                          "default": null,
+                                          "type": [
+                                            "null",
+                                            "string"
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  }
+                                ]
+                              },
+                              {
+                                "name": "appointment",
+                                "default": null,
+                                "type": [
+                                  "null",
+                                  "string"
+                                ]
+                              },
+                              {
+                                "name": "productOffering",
+                                "default": null,
+                                "type": [
+                                  "null",
+                                  {
+                                    "type": "record",
+                                    "namespace": "avro.ProductOrderNotification",
+                                    "name": "ProductOfferingType",
+                                    "fields": [
+                                      {
+                                        "name": "id",
+                                        "default": null,
+                                        "type": [
+                                          "null",
+                                          "string"
+                                        ]
+                                      },
+                                      {
+                                        "name": "href",
+                                        "default": null,
+                                        "type": [
+                                          "null",
+                                          "string"
+                                        ]
+                                      }
+                                    ]
+                                  }
+                                ]
+                              },
+                              {
+                                "name": "product",
+                                "default": null,
+                                "type": [
+                                  "null",
+                                  {
+                                    "type": "record",
+                                    "namespace": "avro.ProductOrderNotification",
+                                    "name": "ProductType",
+                                    "fields": [
+                                      {
+                                        "name": "place",
+                                        "default": null,
+                                        "type": [
+                                          "null",
+                                          {
+                                            "type": "record",
+                                            "namespace": "avro.ProductOrderNotification",
+                                            "name": "PlaceType",
+                                            "fields": [
+                                              {
+                                                "name": "href",
+                                                "default": null,
+                                                "type": [
+                                                  "null",
+                                                  "string"
+                                                ]
+                                              },
+                                              {
+                                                "name": "role",
+                                                "default": null,
+                                                "type": [
+                                                  "null",
+                                                  "string"
+                                                ]
+                                              }
+                                            ]
+                                          }
+                                        ]
+                                      },
+                                      {
+                                        "name": "productCharacteristic",
+                                        "default": null,
+                                        "type": [
+                                          "null",
+                                          {
+                                            "type": "array",
+                                            "default": [],
+                                            "items": {
+                                              "type": "record",
+                                              "namespace": "avro.ProductOrderNotification",
+                                              "name": "ProductCharacteristicType",
+                                              "fields": [
+                                                {
+                                                  "name": "name",
+                                                  "default": null,
+                                                  "type": [
+                                                    "null",
+                                                    "string"
+                                                  ]
+                                                },
+                                                {
+                                                  "name": "value",
+                                                  "default": null,
+                                                  "type": [
+                                                    "null",
+                                                    "string"
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          }
+                                        ]
+                                      }
+                                    ]
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
