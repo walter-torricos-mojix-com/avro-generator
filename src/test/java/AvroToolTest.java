@@ -1,4 +1,4 @@
-import avro.generator.tool.avroTool;
+import avro.generator.tool.AvroTool;
 import org.apache.ivy.util.FileUtil;
 import org.junit.Assert;
 import org.junit.Test;
@@ -7,7 +7,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-public class avroToolTest {
+public class AvroToolTest {
 	@Test
 	public void generateAvroSchemaWhenCalledWithValidDirectoriesGeneratesTheAvroClasses() {
 		String avroSchema = "./src/test/resources/ProductOrderNotification.avsc";
@@ -15,7 +15,7 @@ public class avroToolTest {
 		Path generatedFilesPath = Paths.get("./src//test/resources/avro");
 		Assert.assertFalse("avro folder does not exists", Files.exists(generatedFilesPath));
 		try {
-			avroTool.generateAvroSchema(avroSchema, outputFolder);
+			AvroTool.generateAvroClasses(avroSchema, outputFolder);
 			Assert.assertTrue(Files.exists(generatedFilesPath));
 			FileUtil.forceDelete(generatedFilesPath.toFile());
 		} catch (Exception e) {
