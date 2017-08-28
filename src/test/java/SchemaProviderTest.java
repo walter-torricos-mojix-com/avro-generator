@@ -64,6 +64,18 @@ public class SchemaProviderTest {
 				"\"string\"]}]}}}]}]}", actual);
 	}
 
+	@Test
+	public void schemaProviderForAClassWithPrivateFieldsReturnsASchemaWithoutThem() {
+		Function<Class, JSONObject> sut = SchemaProviderFactory.Get();
+		JSONObject json = sut.apply(ClassWithPrivateFields.class);
+		String actual = json.toJSONString();
+
+		Assert.assertEquals("{\"namespace\":\"avro.ClassWithPrivateFields\"," +
+				"\"name\":\"ClassWithPrivateFields\",\"type\":\"record\"," +
+				"\"fields\":[{\"default\":\"null\",\"name\":\"name\",\"type\":[\"null\",\"string\"]}]}",
+				actual);
+	}
+
 	public class SimpleClass {
 		public String name;
 
@@ -88,5 +100,13 @@ public class SchemaProviderTest {
 		public List<Double> valueTypeList;
 
 		public List<ClassWithDateProperty> referenceTypeList;
+	}
+
+	public class ClassWithPrivateFields {
+		private int privatePrimitive;
+
+		private SimpleClass privateReference;
+
+		public String name;
 	}
 }
