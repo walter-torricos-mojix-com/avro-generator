@@ -7,3 +7,4 @@ out
 target
 /logs/
 /project/project
+/src/test/resources/avro

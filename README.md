@@ -1,11 +1,13 @@
 # avro-generator
 
-To be able to use this plugin first publish it locally with:
-    $ sbt publishLocal
-This way it will be published to {user.home}/.ivy2/local.
+## Steps add this plugin:
+1. Clone the repo.
+2. Publish the plugin locally by running "$ sbt compile publishLocal" this way it will be published to {user.home}/.ivy2/local.
+3. Add the plugin in your target project by adding the following line:    
+addSbtPlugin("local" % "avro-generator" % "0.0.1")    
+to the file project/plugins.sbt
 
-Now you can add it as a plugin like any other plugin by adding it to the plugins.sbt file:
-addSbtPlugin("local" % "avro-generator" % "0.0.1")
 
-try with a local resolver in case of problems
-resolvers += Resolver.sonatypeRepo("local")
+## Usage
+Once you complete the steps to add the plugin you will be able to use it by running it like this from the root folder of the project:
+    $ sbt "avro complete.class.Name /path/to/output"
