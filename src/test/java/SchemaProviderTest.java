@@ -1,4 +1,4 @@
-import avro.generator.schema.SchemaProviderFactory;
+import avro.generator.schema.SchemaProvider;
 import org.json.simple.JSONObject;
 import org.junit.Assert;
 import org.junit.Test;
@@ -9,7 +9,7 @@ import java.util.function.Function;
 public class SchemaProviderTest {
 	@Test
 	public void schemaProviderForASimpleClassWithValueTypePropertiesReturnsTheCorrectJsonSchema() {
-		Function<Class, JSONObject> sut = SchemaProviderFactory.Get();
+		Function<Class, JSONObject> sut = SchemaProvider::getSchema;
 		JSONObject json = sut.apply(SimpleClass.class);
 		String actual = json.toJSONString();
 
@@ -22,7 +22,7 @@ public class SchemaProviderTest {
 
 	@Test
 	public void schemaProviderForAClassWithADatePropertyReturnsTheTypeAsStringAsWeUseAvro1_7_7() {
-		Function<Class, JSONObject> sut = SchemaProviderFactory.Get();
+		Function<Class, JSONObject> sut = SchemaProvider::getSchema;
 		JSONObject json = sut.apply(ClassWithDateProperty.class);
 		String actual = json.toJSONString();
 
@@ -33,7 +33,7 @@ public class SchemaProviderTest {
 
 	@Test
 	public void schemaProviderForAClassWithAPropertyOfAReferenceTypeReturnTheCorrectJsonSchema() {
-		Function<Class, JSONObject> sut = SchemaProviderFactory.Get();
+		Function<Class, JSONObject> sut = SchemaProvider::getSchema;
 		JSONObject json = sut.apply(ClassWithAReferenceType.class);
 		String actual = json.toJSONString();
 
@@ -48,7 +48,7 @@ public class SchemaProviderTest {
 
 	@Test
 	public void schemaProviderForAClassWithAListOfElementsReturnTheCorrectJsonSchema() {
-		Function<Class, JSONObject> sut = SchemaProviderFactory.Get();
+		Function<Class, JSONObject> sut = SchemaProvider::getSchema;
 		JSONObject json = sut.apply(ClassWithListOfElements.class);
 		String actual = json.toJSONString();
 
@@ -66,7 +66,7 @@ public class SchemaProviderTest {
 
 	@Test
 	public void schemaProviderForAClassWithPrivateFieldsReturnsASchemaWithoutThem() {
-		Function<Class, JSONObject> sut = SchemaProviderFactory.Get();
+		Function<Class, JSONObject> sut = SchemaProvider::getSchema;
 		JSONObject json = sut.apply(ClassWithPrivateFields.class);
 		String actual = json.toJSONString();
 

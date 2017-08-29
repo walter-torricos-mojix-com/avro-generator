@@ -13,18 +13,16 @@ import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-class SchemaProvider {
-	static JSONObject getSchema(Function<Class, JSONObject> schemaProvider,
-        Function<Class, JSONArray> schemaFieldsProvider,
-        Class model) {
-		JSONObject schema = schemaProvider.apply(model);
-		JSONArray fields = schemaFieldsProvider.apply(model);
+public class SchemaProvider {
+	public static JSONObject getSchema(Class model) {
+		JSONObject schema = initSchema(model);
+		JSONArray fields = schemaFieldsProvider(model);
 		schema.put(SchemaConstants.Properties.fields, fields);
 
 		return schema;
 	}
 
-	static JSONObject initSchema(Class model) {
+	private static JSONObject initSchema(Class model) {
 		JSONObject json = new JSONObject();
 		json.put(SchemaConstants.Properties.namespace, getNamespace(model));
 		json.put(SchemaConstants.Properties.type, SchemaConstants.Values.record);
@@ -33,7 +31,7 @@ class SchemaProvider {
 		return json;
 	}
 
-	static JSONArray schemaFieldsProvider(Class model) {
+	private static JSONArray schemaFieldsProvider(Class model) {
 		JSONArray schemaFields = new JSONArray();
 		List<JSONObject> fields = Arrays.stream(model.getFields())
 			.map(field -> fieldsTypeProvider(

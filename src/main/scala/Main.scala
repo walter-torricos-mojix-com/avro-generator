@@ -5,8 +5,9 @@ object Main {
       val app = new Bootstrap()
       val classPath = args(0)
       val className = args(1)
-      val outputFolder = args(2)
+      val avroOutputFolder = args(2)
+      val outputFolder = args(3)
       val avroGeneratorTask = app.getGenerateAvroSchemaTask();
-      avroGeneratorTask.accept(classPath, className, outputFolder)
+      avroGeneratorTask.accept(classPath, className, avroOutputFolder, outputFolder)
   }
 }

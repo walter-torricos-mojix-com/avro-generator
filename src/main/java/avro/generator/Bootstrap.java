@@ -3,37 +3,46 @@ package avro.generator;
 import avro.generator.common.Checked;
 import avro.generator.common.JSONUtils;
 import avro.generator.common.ReflectionUtils;
-import avro.generator.schema.SchemaProviderFactory;
+import avro.generator.schema.SchemaFilePathProvider;
+import avro.generator.schema.SchemaProvider;
 import avro.generator.tool.AvroTool;
 
 public class Bootstrap {
 
-	private final Checked.TriConsumer<String, String, String> generateAvroSchemaTask;
+	private final Checked.TetraConsumer<String, String, String, String> generateAvroSchemaTask;
 
 	public Bootstrap() {
 		this.generateAvroSchemaTask = this.createAvroSchemaTask();
 	}
 
-	public Checked.TriConsumer<String, String, String> getGenerateAvroSchemaTask() {
+	public Checked.TetraConsumer<String, String, String, String> getGenerateAvroSchemaTask() {
 		return generateAvroSchemaTask;
 	}
 
-	private Checked.TriConsumer<String, String, String> createAvroSchemaTask() {
+	private Checked.TetraConsumer<String, String, String, String> createAvroSchemaTask() {
 		Checked.Function<Class, String> schemaProvider = targetClass ->
-				JSONUtils.toPrettyString(SchemaProviderFactory.Get().apply(targetClass));
+				JSONUtils.toPrettyString(SchemaProvider.getSchema(targetClass));
 
-		Checked.TriConsumer<String, String, String> avroSchemaGeneratorTask =
-				(classPath, className, outputPath) -> Tasks.generateAvroSchema(
+		Checked.TetraConsumer<String, String, String, String> avroSchemaGeneratorTask =
+				(classPath, className, avroOutputPath, outputPath) -> Tasks.generateAvroSchema(
 						ReflectionUtils::LoadClass,
 						schemaProvider,
+						SchemaFilePathProvider::Get,
 						AvroTool::generateAvroClasses,
 						classPath,
 						className,
+						avroOutputPath,
 						outputPath);
 
-		Checked.TriConsumer<String, String, String> taskWithInfo = (classPath, className, outputPath) ->
-			Tasks.generateAvroSchemaInfo(avroSchemaGeneratorTask, classPath, className, outputPath);
+		Checked.TetraConsumer<String, String, String, String> taskWithLogs =
+				(classPath, className, avroOutputPath, outputPath) ->
+					Tasks.generateAvroSchemaInfo(
+						avroSchemaGeneratorTask,
+						classPath,
+						className,
+						avroOutputPath,
+						outputPath);
 
-		return taskWithInfo;
+		return taskWithLogs;
 	}
 }

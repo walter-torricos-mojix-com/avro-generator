@@ -11,8 +11,9 @@ public class AvroToolTest {
 	@Test
 	public void generateAvroSchemaWhenCalledWithValidDirectoriesGeneratesTheAvroClasses() {
 		String avroSchema = "./src/test/resources/ProductOrderNotification.avsc";
-		String outputFolder = "./src/test/resources";
-		Path generatedFilesPath = Paths.get("./src/test/resources/avro");
+		String outputFolder = "./src/test/resources/output/avrotooltest";
+		Path generatedFilesPath = Paths.get("./src/test/resources/output/avrotooltest/avro");
+
 		Assert.assertFalse("avro folder does not exists", Files.exists(generatedFilesPath));
 		try {
 			AvroTool.generateAvroClasses(avroSchema, outputFolder);

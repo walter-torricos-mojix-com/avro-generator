@@ -1,3 +1,4 @@
+.DS_Store
 .eclipse
 .idea
 *.iml
@@ -7,4 +8,5 @@ out
 target
 /logs/
 /project/project
-/src/test/resources/avro
+!/src/test/resources/output/.gitkeep
+/src/test/resources/output

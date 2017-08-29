@@ -12,6 +12,11 @@ public class Checked {
 	}
 
 	@FunctionalInterface
+	public interface TetraConsumer<TInputA, TInputB, TInputC, TInputD> {
+		void accept(TInputA inputA, TInputB inputB, TInputC inputC, TInputD inputD) throws Exception;
+	}
+
+	@FunctionalInterface
 	public interface Function<TInput, TOutput> {
 		TOutput apply(TInput input) throws Exception;
 	}
