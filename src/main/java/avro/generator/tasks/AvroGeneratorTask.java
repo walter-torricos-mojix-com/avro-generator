@@ -1,10 +1,10 @@
-package avro.generator;
+package avro.generator.tasks;
 
 import avro.generator.common.Checked;
 import avro.generator.common.FileUtils;
 
-public class Tasks {
-	public static void generateAvroSchema(
+public class AvroGeneratorTask {
+	public static void generateSchema(
 		Checked.BiFunction<String, String, Class> classLoader,
 		Checked.Function<Class, String> schemaProvider,
 		Checked.BiFunction<String, Class, String> schemaPathProvider,
@@ -21,7 +21,7 @@ public class Tasks {
 		avroClassGenerator.accept(avroSchemaPath, outputFolder);
 	}
 
-	public static void generateAvroSchemaInfo(
+	public static void generateSchemaInfoDecorator(
 		Checked.TetraConsumer<String, String, String, String> generator,
 		String classPath,
 		String targetClassFullName,
@@ -40,5 +40,15 @@ public class Tasks {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	public static void displayHelp() {
+		System.out.println("avro example: ");
+		System.out.println("$ sbt \"avro complete.class.Name /path/to/avro/schema/folder " +
+				"/path/to/avro/classes/output/folder\"");
+		System.out.println("avro receives 3 arguments:");
+		System.out.println("\t*The complete name of the target class");
+		System.out.println("\t*The path where the avro schema will be saved");
+		System.out.println("\t*The path where the avro classes will be generated");
 	}
 }

@@ -9,7 +9,6 @@ import java.lang.reflect.ParameterizedType;
 import java.math.BigInteger;
 import java.util.*;
 import java.util.function.BiFunction;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class SchemaProvider {
@@ -259,10 +258,5 @@ public class SchemaProvider {
 
 	private static boolean isDate(Class target) {
 		return target.isAssignableFrom(Date.class);
-	}
-
-	private static boolean isPrimitive(Class target) {
-		return isNatural(target) || isDecimal(target) || isBoolean(target) || isString(target) ||
-			isDate(target);
 	}
 }

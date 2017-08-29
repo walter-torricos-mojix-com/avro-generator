@@ -4,7 +4,7 @@
 1. Clone the repo.
 2. Publish the plugin locally by running "$ sbt compile publishLocal" this way it will be published to {user.home}/.ivy2/local.
 3. Add the plugin in your target project by adding the following line:    
-addSbtPlugin("local" % "avro-generator" % "0.0.1")    
+addSbtPlugin("local" % "avro-generator" % "0.0.1")
 to the file project/plugins.sbt
 
 

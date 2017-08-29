@@ -10,10 +10,7 @@ version := "0.0.1"
 // and so do all sbt plugins for 0.13.x.
 scalaVersion := "2.10.4"
 
-offline := true
-
-//If having problems try disable this
-//publishMavenStyle := false
+// offline := true
 
 // junit
 libraryDependencies ++= Seq(

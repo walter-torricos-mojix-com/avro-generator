@@ -33,12 +33,8 @@ object AvroGeneratorPlugin extends AutoPlugin {
             avroGeneratorTask.accept(classPath, targetClassName, avroFolderPath, outputFolderPath)
         },
         avroHelp := {
-            println("avro example: ")
-            println("$ sbt \"avro complete.class.Name /path/to/avro/schema/folder /path/to/avro/classes/output/folder\"")
-            println("avro receives 3 arguments:")
-            println("\t*The complete name of the target class")
-            println("\t*The path where the avro schema will be saved")
-            println("\t*The path where the avro classes will be generated")
+            val displayInfo = app.getDisplayInfo();
+            displayInfo.run();
         }
     )
 }
