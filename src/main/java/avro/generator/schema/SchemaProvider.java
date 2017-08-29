@@ -1,14 +1,13 @@
 package avro.generator.schema;
 
+import avro.generator.common.ReflectionUtils;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
 import java.math.BigInteger;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -36,7 +35,10 @@ public class SchemaProvider {
 		List<JSONObject> fields = Arrays.stream(model.getFields())
 			.map(field -> fieldsTypeProvider(
 				model,
-				new SchemaFieldMetadata(field.getType(), field.getName(), field.getGenericType(),
+				new SchemaFieldMetadata(
+					field.getType(),
+					field.getName(),
+					field.getGenericType(),
 					false)))
 			.collect(Collectors.toList());
 
@@ -59,6 +61,7 @@ public class SchemaProvider {
 			SchemaProvider::getDecimalNumberFieldSchema,
 			SchemaProvider::getBooleanFieldSchema,
 			SchemaProvider::getDateFieldSchema,
+			SchemaProvider::getEnumSchema,
 			SchemaProvider::getListFieldSchema,
 			SchemaProvider::getRecordFieldSchema);
 
@@ -149,6 +152,40 @@ public class SchemaProvider {
 		return jsonField;
 	}
 
+	private static JSONObject getEnumSchema(Class model, SchemaFieldMetadata field) {
+		if(!field.getType().isEnum()) {
+			return null;
+		}
+
+		JSONObject jsonField = getCommonFieldSchema(model, field);
+		JSONArray types = new JSONArray();
+		types.add(SchemaConstants.Values.nullValue);
+		Optional<Field> valueField = ReflectionUtils.getClassField(field.getType(), "value");
+		if(!valueField.isPresent()) {
+			types.add(SchemaConstants.Values.string);
+			jsonField.put(SchemaConstants.Properties.type, types);
+
+			return jsonField;
+		}
+
+		Class valueType = valueField.get().getType();
+		if(isNatural(valueType)) {
+			types.add(SchemaConstants.Values.naturalNumber);
+		}
+		else if(isBoolean(valueType)) {
+			types.add(SchemaConstants.Values.booleanValue);
+		}
+		else if(isDecimal(valueType)) {
+			types.add(SchemaConstants.Values.decimalNumber);
+		}
+		else {
+			types.add(SchemaConstants.Values.string);
+		}
+
+		jsonField.put(SchemaConstants.Properties.type, types);
+		return jsonField;
+	}
+
 	private static JSONObject getListFieldSchema(Class model, SchemaFieldMetadata field) {
 		if(!Collection.class.isAssignableFrom(field.getType())) {
 			return null;
@@ -164,15 +201,7 @@ public class SchemaProvider {
 			.getActualTypeArguments()[0];
 		JSONObject item = fieldsTypeProvider(model, new SchemaFieldMetadata(
 			listParameterClass, listParameterClass.getSimpleName(), null, true));
-		if(isPrimitive(listParameterClass)) {
-			Object value = ((JSONArray)item.get(SchemaConstants.Properties.type)).get(1);
-			arrayType.put(SchemaConstants.Properties.items, value);
-		}
-		else {
-			arrayType.put(SchemaConstants.Properties.items, item);
-		}
-
-
+		arrayType.put(SchemaConstants.Properties.items, item);
 		types.add(arrayType);
 		jsonField.put(SchemaConstants.Properties.type, types);
 
@@ -194,9 +223,12 @@ public class SchemaProvider {
 		record.put(SchemaConstants.Properties.name,
 			   name.substring(0, 1).toUpperCase() + name.substring(1));
 		record.put(SchemaConstants.Properties.fields, schemaFieldsProvider(field.getType()));
-		types.add(record);
-		jsonField.put(SchemaConstants.Properties.type, field.isArrayGenericType() ? record : types);
+		if(field.isArrayGenericType()) {
+			return record;
+		}
 
+		types.add(record);
+		jsonField.put(SchemaConstants.Properties.type, types);
 		return jsonField;
 	}
 

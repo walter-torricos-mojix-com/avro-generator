@@ -9,7 +9,7 @@ public class ReflectionUtilsTest {
 		String classFullName = "model.Person";
 
 		try {
-			Class actual = ReflectionUtils.LoadClass(classesPath, classFullName);
+			Class actual = ReflectionUtils.loadClass(classesPath, classFullName);
 
 			Assert.assertNotNull(actual);
 		} catch (Exception e) {

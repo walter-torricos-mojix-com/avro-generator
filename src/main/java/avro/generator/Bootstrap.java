@@ -25,7 +25,7 @@ public class Bootstrap {
 
 		Checked.TetraConsumer<String, String, String, String> avroSchemaGeneratorTask =
 				(classPath, className, avroOutputPath, outputPath) -> Tasks.generateAvroSchema(
-						ReflectionUtils::LoadClass,
+						ReflectionUtils::loadClass,
 						schemaProvider,
 						SchemaFilePathProvider::Get,
 						AvroTool::generateAvroClasses,
