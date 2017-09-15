@@ -50,5 +50,19 @@ public class AvroGeneratorTask {
 		System.out.println("\t*The complete name of the target class");
 		System.out.println("\t*The path where the avro schema will be saved");
 		System.out.println("\t*The path where the avro classes will be generated");
+		System.out.println();
+		System.out.println("avro from JSON example: ");
+		System.out.println("$ sbt \"avroJson /path/to/avro/schema.avsc /path/to/avro/classes/output/folder\"");
+		System.out.println("avroJson receives 2 arguments:");
+		System.out.println("\t*The path to the avro schema file");
+		System.out.println("\t*The path where the avro schema will be saved");
+	}
+
+	public static void generateFromJson(
+		Checked.BiConsumer<String, String> avroClassGenerator,
+		String avroSchemaPath,
+		String outputFolder) throws Exception {
+
+		avroClassGenerator.accept(avroSchemaPath, outputFolder);
 	}
 }
