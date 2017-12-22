@@ -14,11 +14,11 @@ public class Bootstrap {
 
 	private final Runnable displayInfo;
 
-	private Checked.BiConsumer<String, String> generateAvroSchemaFromJson;
+	private Checked.BiConsumer<String, String> generateFromAvroSchema;
 
 	public Bootstrap() {
 		this.generateAvroSchemaTask = this.createAvroSchemaTask();
-		this.generateAvroSchemaFromJson = this.createAvroFromJsonTask();
+		this.generateFromAvroSchema = this.createAvroFromSchema();
 		this.displayInfo = AvroGeneratorTask::displayHelp;
 	}
 
@@ -30,8 +30,8 @@ public class Bootstrap {
 		return this.displayInfo;
 	}
 
-	public Checked.BiConsumer<String, String> getGenerateAvroSchemaFromJsonTask() {
-		return this.generateAvroSchemaFromJson;
+	public Checked.BiConsumer<String, String> getGenerateFromAvroSchema() {
+		return this.generateFromAvroSchema;
 	}
 
 	private Checked.TetraConsumer<String, String, String, String> createAvroSchemaTask() {
@@ -61,7 +61,7 @@ public class Bootstrap {
 		return taskWithLogs;
 	}
 
-	private Checked.BiConsumer<String,String> createAvroFromJsonTask() {
+	private Checked.BiConsumer<String,String> createAvroFromSchema() {
 		return (avroSchemaPath, outputFolder) ->
 			AvroGeneratorTask.generateFromJson(AvroTool::generateAvroClasses, avroSchemaPath, outputFolder);
 	}

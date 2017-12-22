@@ -8,7 +8,7 @@ object AvroGeneratorPlugin extends AutoPlugin {
         // Defines all settings/tasks that get automatically imported when the plugin is enabled.
         val avro = inputKey[Unit]("path")
         val avroHelp = inputKey[Unit]("path")
-        val avroJson = inputKey[Unit]("path")
+        val avroSchema = inputKey[Unit]("path")
     }
 
     // make our own settings and commands available for the rest of the file
@@ -37,11 +37,11 @@ object AvroGeneratorPlugin extends AutoPlugin {
             val displayInfo = app.getDisplayInfo()
             displayInfo.run();
         },
-        avroJson := {
+        avroSchema := {
             val args: Seq[String] = spaceDelimited("").parsed
             val avroSchemaPath = args.head
             val outputFolderPath = args(1)
-            val generateFromSchema = app.getGenerateAvroSchemaFromJsonTask()
+            val generateFromSchema = app.getGenerateFromAvroSchema()
             generateFromSchema.accept(avroSchemaPath, outputFolderPath)
         }
     )
