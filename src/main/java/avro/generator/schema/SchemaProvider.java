@@ -43,11 +43,10 @@ public class SchemaProvider {
 
 		for (JSONObject field : fields) {
 			if(field == null) {
-				System.out.println("The field " + field.getClass().getName() + "of type " +
-					field.getClass().getTypeName() + "was not included in the avro schema.");
+				System.out.println("A field was not included in the avro schema.");
+			} else {
+				schemaFields.add(field);
 			}
-
-			schemaFields.add(field);
 		}
 
 		return schemaFields;

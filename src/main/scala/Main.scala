@@ -7,7 +7,7 @@ object Main {
       val className = args(1)
       val avroOutputFolder = args(2)
       val outputFolder = args(3)
-      val avroGeneratorTask = app.getGenerateAvroSchemaTask();
+      val avroGeneratorTask = app.getGenerateAvroSchemaAndClassesTask();
       avroGeneratorTask.accept(classPath, className, avroOutputFolder, outputFolder)
   }
 }

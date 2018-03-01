@@ -30,7 +30,7 @@ object AvroGeneratorPlugin extends AutoPlugin {
                 .filter(c => c.getAbsolutePath().endsWith("classes"))
                 .head
             val classPath = classesFolder.getAbsolutePath()
-            val avroGeneratorTask = app.getGenerateAvroSchemaTask()
+            val avroGeneratorTask = app.getGenerateAvroSchemaAndClassesTask()
             avroGeneratorTask.accept(classPath, targetClassName, avroFolderPath, outputFolderPath)
         },
         avroHelp := {

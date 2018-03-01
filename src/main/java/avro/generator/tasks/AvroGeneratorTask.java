@@ -5,6 +5,20 @@ import avro.generator.common.FileUtils;
 
 public class AvroGeneratorTask {
 	public static void generateSchema(
+			Checked.BiFunction<String, String, Class> classLoader,
+			Checked.Function<Class, String> schemaProvider,
+			Checked.BiFunction<String, Class, String> schemaPathProvider,
+			String classPath,
+			String targetClassFullName,
+			String avroOutputFolder) throws Exception {
+
+		Class targetClass = classLoader.apply(classPath, targetClassFullName);
+		String avroSchema = schemaProvider.apply(targetClass);
+		String avroSchemaPath  = schemaPathProvider.apply(avroOutputFolder, targetClass);
+		FileUtils.createOrReplaceFile(avroSchemaPath, avroSchema);
+	}
+
+	public static void generateSchemaAndClasses(
 		Checked.BiFunction<String, String, Class> classLoader,
 		Checked.Function<Class, String> schemaProvider,
 		Checked.BiFunction<String, Class, String> schemaPathProvider,
