@@ -1,0 +1,1 @@
+addSbtPlugin("local" % "avro-generator" % "0.0.1")

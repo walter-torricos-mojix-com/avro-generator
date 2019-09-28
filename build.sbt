@@ -6,9 +6,11 @@ organization := "local"
 
 version := "0.0.1"
 
-scalaVersion := "2.11.7"
+// sbt 0.13.x series uses Scala 2.10.x when it loads up, so sbt 0.13.x itself must be compiled against Scala 2.10,
+// and so do all sbt plugins for 0.13.x.
+scalaVersion := "2.10.4"
 
-offline := true
+// offline := true
 
 // junit
 libraryDependencies ++= Seq(
@@ -20,4 +22,9 @@ libraryDependencies ++= Seq(
 libraryDependencies ++= Seq(
   "org.apache.avro" % "avro" % "1.7.7",
   "org.apache.avro" % "avro-tools" % "1.7.7"
+)
+
+libraryDependencies ++= Seq(
+  "com.googlecode.json-simple" % "json-simple" % "1.1",
+  "com.cedarsoftware" % "json-io" % "4.10.0"
 )
